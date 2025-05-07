@@ -522,8 +522,11 @@
 .card-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  column-gap: 24px;      /* Horizontal spacing between cards */
+  row-gap: 70px;         /* Increased vertical spacing between rows to prevent overlap */
+  margin-top: 20px;
 }
+    
 .card-wrapper:nth-child(3n+2) {
   transform: translateY(60px);
 }
