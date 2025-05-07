@@ -516,12 +516,28 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  margin-top: 20px;
+}
+.card-wrapper:nth-child(3n+2) {
+  transform: translateY(60px);
+}
+.card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-left: 4px solid #55ABC9;
+}
+.tag {
+  display: inline-block;
+  background-color: rgba(85, 171, 201, 0.1);
+  color: #55ABC9;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-right: 8px;
+  margin-bottom: 5px;
 }
 
-.card-grid .card-wrapper:nth-child(3n+2) {
-  transform: translateY(30px);
-}
 
 </style>
 
@@ -1364,95 +1380,47 @@ const toggleFactor = (factor, value) => {
                     : 'Select criteria to see potential strategies'}
                 </h2>
                 
-                {filteredStrategies.length === 0 ? (
-                  <div className="bg-gray-50 p-8 text-center rounded-lg">
-                    <p className="text-gray-600">
-                      {selectedRights.length > 0 || selectedSituations.length > 0
-                        ? 'No strategies match your current criteria. Try adjusting your selections.'
-                        : 'Select your IP rights and situation to see potential strategies.'}
-                    </p>
-                  </div>
-                ) : (
-                  <div className="space-y-6" style={{ maxHeight: '700px', overflowY: 'auto', paddingRight: '8px' }}>
-                    {filteredStrategies.map(strategy => {
-                      // Get the right color for the border
-                      const rights = strategy.right.split('; ');
-                      const mainRight = rights[0];
-                      const borderClass = `border-${getRightColor(mainRight)}`;
-                      
-                      // Get relevancy information
-                      const relevancy = getRelevancyLevel(strategy.matchScore);
-                      
-                      return (
-                        <div key={strategy.id} className={`strategy-card ${borderClass}`}>
-                          {/* Left side - Strategy details */}
-                          <div className="card-left">
-                            <div className="text-sm text-gray-500 mb-1">{strategy.overtitle}</div>
-                            <h3 className="text-lg font-semibold mb-2">{strategy.title}</h3>
-                            <p className="text-gray-700 mb-4">{strategy.description}</p>
-                            
-                            <div className="flex flex-wrap gap-2">
-                              {/* IP Right tags */}
-                              {rights.map((right, i) => (
-                                <span key={`right-${i}`} className={`tag tag-${getRightColor(right)}`}>
-                                  {right}
-                                </span>
-                              ))}
-                              
-                              {/* Response Type tags */}
-                              {strategy.responseType.map((type, i) => (
-                                <span key={`response-${i}`} className="tag" style={{ 
-                                  backgroundColor: 'rgba(120, 122, 187, 0.1)', 
-                                  color: 'var(--highlight)' 
-                                }}>
-                                  {type}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                          
-                          {/* Right side - Match details */}
-                          <div className="card-right">
-                            <div>
-                              <div className="relevancy-indicator">
-                                <span>Relevancy</span>
-                                <span className={`relevancy-badge relevancy-${relevancy.level}`}>
-                                  {relevancy.text}
-                                </span>
-                              </div>
-                            </div>
-                            
-                            <div className="match-details">
-                              {/* Matches */}
-                              {strategy.matches.length > 0 && (
-                                <div>
-                                  <div className="matches">Matches your preferences</div>
-                                  <ul className="match-list good">
-                                    {strategy.matches.map((match, i) => (
-                                      <li key={`match-${i}`}>{match}</li>
-                                    ))}
-                                  </ul>
-                                </div>
-                              )}
-                              
-                              {/* Non-matches */}
-                              {strategy.nonMatches.length > 0 && (
-                                <div>
-                                  <div className="non-matches">May not suit your preferences</div>
-                                  <ul className="match-list bad">
-                                    {strategy.nonMatches.map((nonMatch, i) => (
-                                      <li key={`nonmatch-${i}`}>{nonMatch}</li>
-                                    ))}
-                                  </ul>
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
+            //insert here
+             {filteredStrategies.length === 0 ? (
+  <div className="bg-gray-50 p-8 text-center rounded-lg">
+    <p className="text-gray-600">
+      {selectedRights.length > 0 || selectedSituations.length > 0
+        ? 'No strategies match your current criteria. Try adjusting your selections.'
+        : 'Select your IP rights and situation to see potential strategies.'}
+    </p>
+  </div>
+) : (
+  <div className="card-grid">
+    {filteredStrategies.map(strategy => {
+      const rights = strategy.right.split('; ');
+      const mainRight = rights[0];
+      const borderClass = `border-${getRightColor(mainRight)}`;
+
+      return (
+        <div key={strategy.id} className="card-wrapper">
+          <div className={`card ${borderClass}`}>
+            <div className="text-sm text-gray-500 mb-1">{strategy.overtitle}</div>
+            <h3 className="text-lg font-semibold mb-2">{strategy.title}</h3>
+            <p className="text-gray-700 mb-4">{strategy.description}</p>
+            <div className="flex flex-wrap gap-2">
+              {rights.map((right, i) => (
+                <span key={`right-${i}`} className={`tag tag-${getRightColor(right)}`}>
+                  {right}
+                </span>
+              ))}
+              {strategy.responseType.map((type, i) => (
+                <span key={`response-${i}`} className="tag" style={{ backgroundColor: 'rgba(120, 122, 187, 0.1)', color: 'var(--highlight)' }}>
+                  {type}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+)}
+
               </div>
             </div>
           </div>
