@@ -257,7 +257,7 @@
 }
 
 .card-grid .card-wrapper:nth-child(3n+2) {
-  transform: translateY(30px);
+  transform: translateY(45px);
 }
 
 </style>
@@ -547,8 +547,8 @@
       const [strategies, setStrategies] = React.useState([]);
       const [loading, setLoading] = React.useState(true);
       const [accordions, setAccordions] = React.useState({
-        ipRights: true,
-        situation: true,
+        ipRights: false,
+        situation: false,
         preferences: false,
         otherFactors: false
       });
