@@ -1077,15 +1077,15 @@ const toggleFactor = (factor, value) => {
       };
       
       // Show loading state
-      if (loading) {
-        
-          <div className="text-center py-12">
-            <div className="text-xl">Loading IP strategies...</div>
-          </div>
-        );
-      }
+if (loading) {
+  return (
+    <div className="text-center py-12">
+      <div className="text-xl">Loading IP strategies...</div>
+    </div>
+  );
+}
 
-      
+      return(
         <div>
           <h1 className="text-3xl font-bold mb-6" style={{ color: 'var(--teal)' }}>IP Strategy Finder</h1>
           
@@ -1172,6 +1172,7 @@ const toggleFactor = (factor, value) => {
                     )}
                   </div>
                 </div>
+                
                 
                 {accordions.situation && (
                   <div className="accordion-content">
