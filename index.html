@@ -1078,14 +1078,14 @@ const toggleFactor = (factor, value) => {
       
       // Show loading state
       if (loading) {
-        return (
+        
           <div className="text-center py-12">
             <div className="text-xl">Loading IP strategies...</div>
           </div>
         );
       }
 
-      return (
+      
         <div>
           <h1 className="text-3xl font-bold mb-6" style={{ color: 'var(--teal)' }}>IP Strategy Finder</h1>
           
@@ -1402,27 +1402,40 @@ const toggleFactor = (factor, value) => {
       const mainRight = rights[0];
       const borderClass = `border-${getRightColor(mainRight)}`;
 
-      return (
-        <div key={strategy.id} className="card-wrapper">
-          <div className={`card ${borderClass}`}>
-            <div className="text-sm text-gray-500 mb-1">{strategy.overtitle}</div>
-            <h3 className="text-lg font-semibold mb-2">{strategy.title}</h3>
-            <p className="text-gray-700 mb-4">{strategy.description}</p>
-            <div className="flex flex-wrap gap-2">
-              {rights.map((right, i) => (
-                <span key={`right-${i}`} className={`tag tag-${getRightColor(right)}`}>
-                  {right}
-                </span>
-              ))}
-              {strategy.responseType.map((type, i) => (
-                <span key={`response-${i}`} className="tag" style={{ backgroundColor: 'rgba(120, 122, 187, 0.1)', color: 'var(--highlight)' }}>
-                  {type}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      );
+/* Find this section in your React component where you render each strategy card */
+/* Look for the return statement inside the filteredStrategies.map function (around line 550-570) */
+
+// Replace the card rendering code with this updated version:
+
+return (
+  <div key={strategy.id} className="card-wrapper">
+    <div className={`card ${borderClass}`}>
+      {/* Add the relevancy badge at the top of each card */}
+      <div className="relevancy-indicator" style={{ marginBottom: '10px' }}>
+        <span>Relevance</span>
+        <span className={`relevancy-badge relevancy-${getRelevancyLevel(strategy.matchScore).level}`}>
+          {getRelevancyLevel(strategy.matchScore).text}
+        </span>
+      </div>
+      
+      <div className="text-sm text-gray-500 mb-1">{strategy.overtitle}</div>
+      <h3 className="text-lg font-semibold mb-2">{strategy.title}</h3>
+      <p className="text-gray-700 mb-4">{strategy.description}</p>
+      <div className="flex flex-wrap gap-2">
+        {rights.map((right, i) => (
+          <span key={`right-${i}`} className={`tag tag-${getRightColor(right)}`}>
+            {right}
+          </span>
+        ))}
+        {strategy.responseType.map((type, i) => (
+          <span key={`response-${i}`} className="tag" style={{ backgroundColor: 'rgba(120, 122, 187, 0.1)', color: 'var(--highlight)' }}>
+            {type}
+          </span>
+        ))}
+      </div>
+    </div>
+  </div>
+);
     })}
   </div>
 )}
