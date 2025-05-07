@@ -249,16 +249,22 @@
       background-color: #F9FAFB;
     }
   
+/* Updated card grid with consistent spacing */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-   column-gap: 24px; /* Horizontal gap remains the same */
-  row-gap: 16px;    /* Reduced vertical gap */
+  gap: 20px; /* Consistent spacing that matches your screenshot */
   margin-top: 20px;
 }
 
+/* Remove the staggered effect completely */
 .card-grid .card-wrapper:nth-child(3n+2) {
-  transform: translateY(60px);
+  transform: none; /* Removes the vertical offset */
+}
+
+/* You might also want to ensure cards have consistent height */
+.strategy-card, .card {
+  height: 100%; /* Makes all cards the same height */
 }
 
 </style>
