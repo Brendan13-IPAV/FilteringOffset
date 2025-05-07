@@ -252,12 +252,13 @@
 .card-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+   column-gap: 24px; /* Horizontal gap remains the same */
+  row-gap: 16px;    /* Reduced vertical gap */
   margin-top: 20px;
 }
 
 .card-grid .card-wrapper:nth-child(3n+2) {
-  transform: translateY(45px);
+  transform: translateY(60px);
 }
 
 </style>
