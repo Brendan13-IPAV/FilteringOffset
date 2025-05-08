@@ -1524,53 +1524,92 @@ if (loading) {
                   </div>
                 </div>
                 
-{accordions.preferences && (
-  <div className="accordion-content">
-    <p className="mb-4">The following are possible considerations which might be relevant:</p>
-    
-    {/* Comment out these lines to show all sliders */}
-    {/* To show all sliders again, change to: const hiddenSliders = []; */}
-    {(() => {
-      const hiddenSliders = ['timeCommitment', 'investment'];
-      
-      return Object.entries(sliderConfigs)
-        .filter(([prefKey]) => !hiddenSliders.includes(prefKey))
-        .map(([prefKey, config]) => (
-          <div className="slider-container" key={prefKey}>
-            <div className="slider-header">
-              <div className="slider-label">
-                {/* Display capitalized label */}
-                {prefKey.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
-              </div>
-              <div className={`slider-value ${preferences[prefKey] === 0 ? 'neutral' : ''}`}>
-                {getPreferenceText(prefKey, preferences[prefKey])}
-              </div>
-            </div>
-            
-            <div className="slider-ticks">
-              {config.tickLabels.map((label, i) => (
-                <span key={i}>{label}</span>
-              ))}
-            </div>
-            
-            <input
-              type="range"
-              min={config.min}
-              max={config.max}
-              step={1}
-              value={preferences[prefKey]}
-              onChange={(e) => updatePreference(prefKey, parseInt(e.target.value))}
-              className="slider"
-            />
-          </div>
-        ));
-    })()}
-  </div>
-)}
-                
+                {accordions.situation && (
+                  <div className="accordion-content">
+                    <p className="mb-4">Select all that apply to your situation:</p>
+                    
+                    <div className="checkbox-group">
+                      {situationOptions.map(option => (
+                        <label key={option.id} className="checkbox-label">
+                          <input
+                            type="checkbox"
+                            checked={selectedSituations.includes(option.id)}
+                            onChange={() => toggleSituation(option.id)}
+                          />
+                          <span>{option.label}</span>
+                        </label>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
+
+        {/* Preferences Section */}
+              <div className="accordion mb-6">
+                <div 
+                  className="accordion-header"
+                  onClick={() => toggleAccordion('preferences')}
+                >
+                  <div className="accordion-title-section">
+                    <div className="accordion-arrow">
+                      {accordions.preferences ? (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
+                        </svg>
+                      ) : (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                        </svg>
+                      )}
+                    </div>
+                    <span>Your Preferences</span>
+                  </div>
+                  
+                  <div>
+                    {Object.values(preferences).some(v => v !== 0) && (
+                      <span className="text-sm text-gray-500">Preferences set</span>
+                    )}
+                  </div>
+                </div>
+                
+                {accordions.preferences && (
+                  <div className="accordion-content">
+                    <p className="mb-4">The following are possible considerations which might be relevant:</p>
+                    
+                    {/* Render sliders dynamically based on config */}
+                    {Object.entries(sliderConfigs).map(([prefKey, config]) => (
+                      <div className="slider-container" key={prefKey}>
+                        <div className="slider-header">
+                          <div className="slider-label">
+                            {/* Display capitalized label */}
+                            {prefKey.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
+                          </div>
+                          <div className={`slider-value ${preferences[prefKey] === 0 ? 'neutral' : ''}`}>
+                            {getPreferenceText(prefKey, preferences[prefKey])}
+                          </div>
+                        </div>
+                        
+                        <div className="slider-ticks">
+                          {config.tickLabels.map((label, i) => (
+                            <span key={i}>{label}</span>
+                          ))}
+                        </div>
+                        
+                        <input
+                          type="range"
+                          min={config.min}
+                          max={config.max}
+                          step={1}
+                          value={preferences[prefKey]}
+                          onChange={(e) => updatePreference(prefKey, parseInt(e.target.value))}
+                          className="slider"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+              
 {/* Other Factors Section */}
 <div className="accordion mb-6">
   <div 
