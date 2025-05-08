@@ -1565,35 +1565,9 @@ if (loading) {
           </div>
         ));
     })()}
-          
-                        
-                        <div className="slider-header">
-                          <div className="slider-label">
-                            {/* Display capitalized label */}
-                            {prefKey.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
-                          </div>
-                          <div className={`slider-value ${preferences[prefKey] === 0 ? 'neutral' : ''}`}>
-                            {getPreferenceText(prefKey, preferences[prefKey])}
-                          </div>
-                        </div>
-                        
-                        <div className="slider-ticks">
-                          {config.tickLabels.map((label, i) => (
-                            <span key={i}>{label}</span>
-                          ))}
-                        </div>
-                        
-                        <input
-                          type="range"
-                          min={config.min}
-                          max={config.max}
-                          step={1}
-                          value={preferences[prefKey]}
-                          onChange={(e) => updatePreference(prefKey, parseInt(e.target.value))}
-                          className="slider"
-                        />
-                      </div>
-                    ))}
+  </div>
+)}
+                
                   </div>
                 )}
               </div>
