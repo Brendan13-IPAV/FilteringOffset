@@ -1524,13 +1524,21 @@ if (loading) {
                   </div>
                 </div>
                 
-                {accordions.preferences && (
-                  <div className="accordion-content">
-                    <p className="mb-4">The following are possible considerations which might be relevant:</p>
-                    
-                    {/* Render sliders dynamically based on config */}
-                    {Object.entries(sliderConfigs).map(([prefKey, config]) => (
-                      <div className="slider-container" key={prefKey}>
+{accordions.preferences && (
+  <div className="accordion-content">
+    <p className="mb-4">The following are possible considerations which might be relevant:</p>
+    
+    {/* Comment out these lines to show all sliders */}
+    {/* To show all sliders again, change to: const hiddenSliders = []; */}
+    const hiddenSliders = ['timeCommitment', 'investment'];
+    
+    {/* Render sliders dynamically based on config */}
+    {Object.entries(sliderConfigs)
+      .filter(([prefKey]) => !hiddenSliders.includes(prefKey))
+      .map(([prefKey, config]) => (
+        <div className="slider-container" key={prefKey}>
+          
+                        
                         <div className="slider-header">
                           <div className="slider-label">
                             {/* Display capitalized label */}
