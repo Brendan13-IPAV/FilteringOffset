@@ -662,8 +662,8 @@ const [otherFactors, setOtherFactors] = React.useState({
         { id: 'Accused', label: 'I\'ve been accused of infringing' },
         { id: 'Enforcement', label: 'I believe my IP has been infringed' },
         { id: 'Proactive', label: 'I\'m proactively protecting my IP' },
-        { id: 'Future', label: 'I\'m considering my future options' },
-        { id: 'Professional', label: 'I need support from an IP professional' }
+        // { id: 'Future', label: 'I\'m considering my future options' },
+        { id: 'Professional', label: 'I\'m seeking support of an IP professional' }
       ];
 
       // Initialize data
@@ -1437,11 +1437,11 @@ if (loading) {
                       ))}
                     </div>
                     
-                    {selectedRights.length > 0 && (
-                      <div className="mt-2 text-sm text-gray-600">
-                        Selected: {selectedRights.join(', ')}
-                      </div>
-                    )}
+                    // {selectedRights.length > 0 && (
+                    //   <div className="mt-2 text-sm text-gray-600">
+                    //     Selected: {selectedRights.join(', ')}
+                    //   </div>
+                    // )}
                   </div>
                 )}
               </div>
