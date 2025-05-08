@@ -706,7 +706,7 @@ const [otherFactors, setOtherFactors] = React.useState({
             title: "Seek binding, authoritative decisions",
             description: "Escalate a wide range of patent matters to court",
             responseType: ["Enforcement", "Accused", "Professional"],
-            right: "Patent",
+            right: ["Patent","PBR"]
             scores: {
               timeCommitment: 9,
               investment: 10,
@@ -826,7 +826,7 @@ const [otherFactors, setOtherFactors] = React.useState({
             title: "Access help tailored to resolve business disputes",
             description: "Australia Small Business & Family Enterprise Ombudsman (ASBFEO).",
             responseType: ["Enforcement", "Accused", "Professional"],
-            right: "Any",
+            right: ["PBR", "Trade mark", "Copyright"]
             scores: {
               timeCommitment: 4,
               investment: 3,
@@ -841,7 +841,7 @@ const [otherFactors, setOtherFactors] = React.useState({
             title: "Resolve IP issues with the help of a third party",
             description: "Invite the other party to enter into mediation to agree to mutually acceptable agreement.",
             responseType: ["Enforcement", "Professional"],
-            right: "Any",
+            right: "Any IP Right",
             scores: {
               timeCommitment: 5,
               investment: 4,
@@ -856,7 +856,7 @@ const [otherFactors, setOtherFactors] = React.useState({
             title: "Resolve IP issues with the help of a third party",
             description: "Agree to be bound by the decision of a highly qualified third party assessment.",
             responseType: ["Enforcement", "Professional"],
-            right: "Any",
+            right: "Any IP Right",
             scores: {
               timeCommitment: 6,
               investment: 6,
@@ -1694,8 +1694,8 @@ if (loading) {
   <div className="bg-gray-50 p-8 text-center rounded-lg">
     <p className="text-gray-600">
       {selectedRights.length > 0 || selectedSituations.length > 0
-        ? 'No strategies match your current criteria. Try adjusting your selections.'
-        : 'Select your IP rights and situation to see potential strategies.'}
+        ? 'No options match your current criteria. Try adjusting your selections.'
+        : 'Select your IP rights and situation to see options to consider.'}
     </p>
   </div>
 ) : (
@@ -1724,11 +1724,13 @@ return (
       <h3 className="text-lg font-semibold mb-2">{strategy.title}</h3>
       <p className="text-gray-700 mb-4">{strategy.description}</p>
       <div className="flex flex-wrap gap-2 mb-4">
+                                {/*
         {rights.map((right, i) => (
           <span key={`right-${i}`} className={`tag tag-${getRightColor(right)}`}>
             {right}
           </span>
-        ))}
+        ))}                    
+                                */}
                         {/*   this is to hide the responce type tags
         {strategy.responseType.map((type, i) => (
           <span key={`response-${i}`} className="tag" style={{ backgroundColor: 'rgba(120, 122, 187, 0.1)', color: 'var(--highlight)' }}>
