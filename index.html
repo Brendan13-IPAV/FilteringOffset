@@ -1714,8 +1714,8 @@ return (
   <div key={strategy.id} className="card-wrapper">
     <div className={`card ${borderClass}`}>
       {/* Add the relevancy badge at the top of each card */}
-      <div className="relevancy-indicator" style={{ marginBottom: '10px' }}>
-        <span>.     Likely Applicability:</span>
+     <div className="relevancy-indicator" style={{ marginBottom: '10px', justifyContent: 'flex-end' }}>
+        <span style={{ fontSize: '11px', alignSelf: 'flex-end', marginRight: '5px' }}>Likely Applicability:</span>
         <span className={`relevancy-badge relevancy-${getRelevancyLevel(strategy.matchScore).level}`}>
           {getRelevancyLevel(strategy.matchScore).text}
         </span>
